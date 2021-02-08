@@ -2,16 +2,17 @@
 
 namespace app\controllers;
 
-use app\models\Art;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
-use app\models\ContactForm;
+use app\models\RegisterForm;
+use app\models\ImageUpload;
+use yii\web\UploadedFile;
 use yii\data\Pagination;
-
+use app\models\Articles;
 class SiteController extends Controller
 {
     /**
@@ -56,11 +57,6 @@ class SiteController extends Controller
         ];
     }
 
-    public function actionView()
-    {
-        $this->render('post');
-    }
-
     /**
      * Displays homepage.
      *
@@ -68,25 +64,19 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-
-        $query = Art::find();
+        $query = Articles::find();
         $pagination = new Pagination(['totalCount'=>$query->count(),'pageSize'=>1]);
 
-        $arts = $query
+        $articles = $query
             ->offset($pagination->offset)
             ->limit($pagination->limit)
             ->all();
         return $this->render('index',[
-            'arts'=>$arts,
+            'articles'=>$articles,
             'pagination'=>$pagination]
         );
     }
 
-    /**
-     * Login action.ф
-     *
-     * @return Response|string
-     */
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
@@ -104,11 +94,6 @@ class SiteController extends Controller
         ]);
     }
 
-    /**
-     * Logout action.
-     *
-     * @return Response
-     */
     public function actionLogout()
     {
         Yii::$app->user->logout();
@@ -116,40 +101,26 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
-    public function actionContact()
+    public function actionRegister()
     {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
+        $model = new RegisterForm();
+ 
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->register()) {
+                if (Yii::$app->getUser()->login($user,3600*24*30)) {
+                    return $this->goHome();
+                }
+            }
         }
-        return $this->render('contact', [
+ 
+        return $this->render('register', [
             'model' => $model,
         ]);
     }
 
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout()
+    public function actionProfile()
     {
-        return $this->render('about');
+        return $this->render('profile');
     }
 
-
-    /**
-     * Testing controller
-     */
-    public function actionSay($message = 'Привет')
-    {
-        return $this->render('say', ['message' => $message]);
-    }
 }
