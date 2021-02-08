@@ -22,6 +22,7 @@ AppAsset::register($this);
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -42,15 +43,7 @@ AppAsset::register($this);
             Yii::$app->user->isGuest ? (
                 ['label' => 'Авторизация', 'url' => ['/site/login']]
             ) : (
-                '<li>'
-                . Html::beginForm(['/site/profile'], 'post')
-                . Html::submitButton(
-                    Yii::$app->user->identity->login,
-                    ['class' => 'btn btn-link logout']
-                ).
-                "<img width='43' src='".  Yii::$app->user->identity->avatar . "'>"
-                . Html::endForm()
-                . '</li>'
+                "<a href='/profile'><img width='50' src='".  Yii::getAlias('@web').'/storage/'.Yii::$app->user->identity->avatar. "'></a>"
             )
         ],
     ]);

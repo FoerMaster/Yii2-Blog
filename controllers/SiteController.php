@@ -9,10 +9,14 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\RegisterForm;
-use app\models\ImageUpload;
-use yii\web\UploadedFile;
+
 use yii\data\Pagination;
 use app\models\Articles;
+
+use app\models\User;
+use app\models\ImageUpload;
+use yii\web\UploadedFile;
+use yii\web\NotFoundHttpException;
 class SiteController extends Controller
 {
     /**
@@ -65,7 +69,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $query = Articles::find();
-        $pagination = new Pagination(['totalCount'=>$query->count(),'pageSize'=>1]);
+        $pagination = new Pagination(['totalCount'=>$query->count(),'pageSize'=>8]);
 
         $articles = $query
             ->offset($pagination->offset)
@@ -118,9 +122,40 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionProfile()
+    public function actionPost($id)
     {
-        return $this->render('profile');
+        $article = Articles::find()->where('id = :id', [':id' => $id])->one();
+
+        return $this->render('post',[
+            'article'=>$article]
+        );
     }
 
+    public function actionAvatar()
+    {
+        $id = Yii::$app->user->identity->id;
+        $model = new ImageUpload;
+        if(Yii::$app->request->isPost){
+            $usr = $this->findModel($id);
+            $file = UploadedFile::getInstance($model,'image');
+
+            if($usr->getImage()){
+                unlink($usr->getImage());
+            }
+
+            if($usr->saveImage($model->uploadFile($file))){
+                return $this->goHome();
+            }
+        }
+        return $this->render('avatar',['model'=>$model]);
+    }
+
+    protected function findModel($id)
+    {
+        if (($model = User::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
 }

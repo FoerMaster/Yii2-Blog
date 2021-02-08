@@ -43,16 +43,27 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
+  
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+
             'rules' => [
+ 
+                'page-<page:\d+>' => 'site/index', //пагинация для главной страницы
+                '/' => 'site/index', //главная страница
+
+                'post' => 'site/post', //статья
             ],
         ],
-        */
+
     ],
     'params' => $params,
+    'modules' => [
+        'profile' => [
+            'class' => 'app\modules\profile\Module',
+        ],
+    ],
 ];
 
 if (YII_ENV_DEV) {

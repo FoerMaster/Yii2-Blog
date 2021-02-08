@@ -21,7 +21,7 @@ class m210207_160939_create_user_table extends Migration
             'is_admin' =>   $this->integer()->defaultValue(0),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
-            'avatar' =>     $this->string()->defaultValue("http://blog.com.test/storage/no-avatar.svg"),
+            'avatar' =>     $this->string()->defaultValue("no-avatar.svg"),
         ]);
     }
 

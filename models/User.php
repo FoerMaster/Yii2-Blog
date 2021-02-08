@@ -77,4 +77,37 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->auth_key = Yii::$app->security->generateRandomString();
     }
+
+    /* IMAGE LOGIC */
+    public function getImage(){
+        $File = Yii::getAlias('@web').'storage/'.$this->avatar;
+        if(file_exists($File) && !empty($this->avatar) && $this->avatar != "no-avatar.svg"){
+            return $File;
+        }
+        return false;
+    }
+
+    public function saveImage($fn){
+        $this->avatar = $fn;
+        return $this->save(false);
+    }
+
+    public function urlImage()
+    {
+        return '/storage/' . $this->avatar;
+    }
+
+    public function delImage()
+    {
+        $avatar = $this->getImage();
+        if($avatar){
+            unlink($avatar);
+        }
+    }
+
+    public function beforeDelete()
+    {
+        $this->delImage();
+        return parent::beforeDelete();
+    }
 }

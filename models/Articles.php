@@ -30,7 +30,7 @@ class Articles extends \yii\db\ActiveRecord
     {
         return [
             [['title'],'required'],
-            [['title','desc','content'],'string'],
+            [['title','content'],'string'],
             [['date'],'date','format'=>'php:Y-m-d'],
             [['date'],'default','value'=>date('Y-m-d')],
             [['title'],'string','max'=>255]
@@ -71,5 +71,7 @@ class Articles extends \yii\db\ActiveRecord
         $this->delImage();
         return parent::beforeDelete();
     }
-
+    public function HasAccess(){
+        return (Yii::$app->user->identity->is_admin == 1) ? (True) : (Yii::$app->user->identity->id == $this->author);
+    }
 }
