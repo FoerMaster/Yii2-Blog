@@ -1,0 +1,25 @@
+.v-post-image {
+    position: relative;
+    top: -119px;
+    left: 0;
+    width: 100%;
+    height: 200%;
+    opacity: 0.3;
+    z-index: 0;
+    margin-bottom: -630.7px;
+}
+.v-post-image-overlay{
+    width: 100%;
+    height: 320px;
+    background-color: #000000;
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+}
+.v-post-title{
+    position: relative;
+    color: white;
+    text-align: center;
+    align-items: center;
+    top: 32%;
+}

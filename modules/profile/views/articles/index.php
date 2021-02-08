@@ -26,11 +26,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'author',
+            [
+                'format' => 'html',
+                'label' => 'Автор',
+                'value' => function($data){
+                    return $data->getAuthorName();
+                }
+            ],
             'title',
             'content:ntext',
-            'image',
+            [
+                'format' => 'html',
+                'label' => 'Картинка',
+                'value' => function($data){
+                    return Html::img('/storage/'.$data->image,['width'=>200]);
+                }
+            ],
             //'date',
 
             ['class' => 'yii\grid\ActionColumn'],

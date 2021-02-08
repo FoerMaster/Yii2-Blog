@@ -115,7 +115,8 @@ a.desc:after {
 }
 
 .image-header{
-    width: 100%;
+    margin: -5px -6px -14px -4px;
+    width: 102.7%;
     height: 128px;
     background-size: cover;
     background-position-y: center;
@@ -159,4 +160,26 @@ a.desc:after {
 .button-prim:hover {
     background-color: #3672f4;
     color: white;
+}
+.post-date{
+    float: right;
+    opacity: 0.6;
+}
+body{
+    background-color: #191b1f;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #191b1f;
+
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 999px;
+    border: 3px solid #191b1f;
 }

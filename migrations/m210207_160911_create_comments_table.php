@@ -16,6 +16,7 @@ class m210207_160911_create_comments_table extends Migration
             'id' =>         $this->primaryKey(),
             'author' =>       $this->integer(),
             'content' =>    $this->text(),
+            'article_id' => $this->integer(),
             'date' =>       $this->date(),
         ]);
     }

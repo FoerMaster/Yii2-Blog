@@ -12,10 +12,11 @@ use app\models\RegisterForm;
 
 use yii\data\Pagination;
 use app\models\Articles;
-
+use app\models\CommentForm;
 use app\models\User;
 use app\models\ImageUpload;
 use yii\web\UploadedFile;
+use app\models\Comments;
 use yii\web\NotFoundHttpException;
 class SiteController extends Controller
 {
@@ -75,9 +76,16 @@ class SiteController extends Controller
             ->offset($pagination->offset)
             ->limit($pagination->limit)
             ->all();
+
+        $query2 = Articles::find();
+        $toparticle = $query2
+            ->orderBy(['date' => SORT_DESC])
+            ->one();
+            
         return $this->render('index',[
             'articles'=>$articles,
-            'pagination'=>$pagination]
+            'pagination'=>$pagination,
+            'toparticle'=>$toparticle]
         );
     }
 
@@ -125,9 +133,23 @@ class SiteController extends Controller
     public function actionPost($id)
     {
         $article = Articles::find()->where('id = :id', [':id' => $id])->one();
+        $commentForm = new CommentForm();
+
+
+        $query = Comments::find();
+        $pagination = new Pagination(['totalCount'=>$query->count(),'pageSize'=>5]);
+
+        $comments = $query
+            ->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->where('article_id = :id', [':id' => $id])
+            ->all();
 
         return $this->render('post',[
-            'article'=>$article]
+            'article'=>$article,
+            'commentForm'=>$commentForm,
+            'pagination'=>$pagination,
+            'comments'=>$comments]
         );
     }
 
@@ -157,5 +179,19 @@ class SiteController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionComment($id)
+    {
+        $model = new CommentForm();
+        
+        if(Yii::$app->request->isPost)
+        {
+            $model->load(Yii::$app->request->post());
+            if($model->saveComment($id))
+            {
+                return $this->redirect(['site/post','id'=>$id]);
+            }
+        }
     }
 }

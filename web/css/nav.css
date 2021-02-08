@@ -1,0 +1,15 @@
+.c-nav {
+    background: #090a0b;
+}
+.c-nav .navbar-header .navbar-brand{
+    color: white;
+    font-weight: 500px;
+    font-size: 16px;
+}
+
+.c-nav .collapse .navbar-right > a > img{
+    color: white;
+    border-radius: 988px;
+    width: 37px;
+    margin: 6.5px;
+}

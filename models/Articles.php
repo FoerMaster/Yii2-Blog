@@ -1,7 +1,9 @@
 <?php
 
 namespace app\models;
-
+use yii\web\NotFoundHttpException;
+use app\models\User;
+use app\models\Comments;
 use Yii;
 
 /**
@@ -37,6 +39,24 @@ class Articles extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getAuthorName()
+    {
+        return $this->findUser($this->author)->login;
+    }
+
+    public function getAuthorModel()
+    {
+        return $this->findUser($this->author);
+    }
+
+    protected function findUser($id)
+    {
+        if (($model = User::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
     /*
     Получение пути до картинки, если нет то даем False
     */
