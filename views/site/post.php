@@ -15,22 +15,23 @@ $this->title = $article->title;
         <div class="v-post-image-overlay">
             <?php if($article->getImage()){echo '<img src='.$article->urlImage().' class="v-post-image">';}?>
             <h1 class="v-post-title"><?php echo $article->title?></h1>
+
+            <a href="<?= Url::to(['/profile', 'id' => $article->getAuthorModel()->id]);?>" class="meta">
+                <p><img src="<?= Yii::getAlias('@web').'/storage/'.$article->getAuthorModel()->avatar ?>" ></p>
+                <p class="name"><?= $article->getAuthorModel()->login?></p>
+                <p class="date"><?= date("d.m.Y", strtotime($article->date))?></p>
+            </a>
         </div>
-        <? $parser2 = new JBBCode\Parser();
-            $parser2->addCodeDefinitionSet(new JBBCode\DefaultCodeDefinitionSet());
-            $parser2->parse(Html::encode($article->content));
 
-        ?>
+        <?$parser2 = new JBBCode\Parser();
+        $parser2->addCodeDefinitionSet(new JBBCode\DefaultCodeDefinitionSet());
+        $parser2->parse(Html::encode($article->content));?>
 
-        <p style="color:#aabcde;font-size: 21px;"><?= $parser2->getAsHtml()?></p>
+        <p class="v-post-content"><?= $parser2->getAsHtml()?></p>
 
-        <br>
+        <hr class='c-hr'>
 
-        <?php
-            echo LinkPager::widget([
-                'pagination' =>$pagination,
-            ]);
-        ?>
+        <?=LinkPager::widget(['pagination' =>$pagination,]);?>
 
         <?php foreach($comments as $comment):?>
             <div class='comment-card'>
@@ -43,9 +44,8 @@ $this->title = $article->title;
                     <? $parser = new JBBCode\Parser();
                        $parser->addCodeDefinitionSet(new JBBCode\DefaultCodeDefinitionSet());
                        $parser->parse(Html::encode($comment->content));
-
                     ?>
-                    <h3><?= $parser->getAsHtml()?></h3>
+                    <h3><?= $parser->getAsHtml() ?></h3>
                 </div>
             </div>
         <?php endforeach;?>
@@ -53,18 +53,12 @@ $this->title = $article->title;
         <?php $form = \yii\widgets\ActiveForm::begin([
             'action'=>['site/comment', 'id'=>$article->id],
             'options'=>['class'=>'form-horizontal contact-form', 'role'=>'form']])?>
-        <div class="form-group">
-            <div class="col-md-12">
-                
-                <?= $form->field($commentForm, 'content')->widget(SCEditor::className(), [
-                    'options' => ['rows' => 6],
-                    'clientOptions' => [
-                        'plugins' => 'bbcode',
-                    ]
-                ]) ?>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <?= $form->field($commentForm, 'content')->textarea(['class'=>'form-control-c','placeholder'=>'Напишите сообщение...'])->label(false)?>
+                </div>
             </div>
-        </div>
-        <button type="submit" class="btn send-btn">Отправить</button>
+            <button type="submit" class="btn send-btn">Отправить</button>
         <?php \yii\widgets\ActiveForm::end();?>
  
     </div>

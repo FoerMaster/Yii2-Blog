@@ -24,6 +24,7 @@ class AppAsset extends AssetBundle
         'css/post.css',
         'css/post-card.css',
         'css/comment.css',
+        'css/profile.css',
         'css/nav.css'
 
     ];

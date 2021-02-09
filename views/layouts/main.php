@@ -9,7 +9,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-
+use yii\helpers\Url;
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -22,7 +22,7 @@ AppAsset::register($this);
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">    
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -30,7 +30,7 @@ AppAsset::register($this);
 <div class="warp">
     <?php
     NavBar::begin([
-        'brandLabel' => "Foer Blog",
+        'brandLabel' => "[#]",
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse c-nav',
@@ -42,7 +42,7 @@ AppAsset::register($this);
             Yii::$app->user->isGuest ? (
                 ['label' => 'Авторизация', 'url' => ['/site/login']]
             ) : (
-                "<a href='/profile'><img width='50' src='".  Yii::getAlias('@web').'/storage/'.Yii::$app->user->identity->avatar. "'></a>"
+                "<a href='".Url::to(['/profile', 'id' => Yii::$app->user->identity->id])."'><img width='50' src='".  Yii::getAlias('@web').'/storage/'.Yii::$app->user->identity->avatar. "'></a>"
             )
         ],
     ]);

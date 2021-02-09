@@ -7,15 +7,15 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\ActiclesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Articles';
+$this->title = 'Посты';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="articles-index">
+<div class="articles-index" style='background-color: white;padding: 19px;'>
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Articles', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать запись', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -24,8 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
+            
             ['class' => 'yii\grid\SerialColumn'],
-
             [
                 'format' => 'html',
                 'label' => 'Автор',
@@ -42,6 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Html::img('/storage/'.$data->image,['width'=>200]);
                 }
             ],
+            
             //'date',
 
             ['class' => 'yii\grid\ActionColumn'],

@@ -181,4 +181,11 @@ class ArticlesController extends Controller
         }
         return $this->render('image',['model'=>$model]);
     }
+
+    public function actionPublish($id)
+    {
+        $art = $this->findModel($id);
+        $art->setStatus();
+        return $this->redirect(['view', 'id' => $art->id]);
+    }
 }

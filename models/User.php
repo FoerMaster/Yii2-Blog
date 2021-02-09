@@ -110,4 +110,9 @@ class User extends ActiveRecord implements IdentityInterface
         $this->delImage();
         return parent::beforeDelete();
     }
+
+    public function getPosts()
+    {
+        return Articles::find()->where('author = :id', [':id' => $this->id]);
+    }
 }

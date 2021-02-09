@@ -15,6 +15,7 @@ class m210207_160900_create_articles_table extends Migration
         $this->createTable('{{%articles}}', [
             'id' =>             $this->primaryKey(),
             'author' =>         $this->integer(),
+            'status' =>         $this->integer()->defaultValue(0),
             'title' =>          $this->string(),
             'content' =>        $this->text(),
             'image' =>          $this->string()->defaultValue(null),

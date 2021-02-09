@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="art-form">
+<div class="art-form"  style='background-color: white;padding: 19px;'>
 
     <?php $form = ActiveForm::begin(); ?>
 

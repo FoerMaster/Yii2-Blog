@@ -57,9 +57,7 @@ class Articles extends \yii\db\ActiveRecord
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-    /*
-    Получение пути до картинки, если нет то даем False
-    */
+
     public function getImage(){
         $File = Yii::getAlias('@web').'storage/'.$this->image;
         if(file_exists($File) && !empty($this->image)){
@@ -93,5 +91,16 @@ class Articles extends \yii\db\ActiveRecord
     }
     public function HasAccess(){
         return (Yii::$app->user->identity->is_admin == 1) ? (True) : (Yii::$app->user->identity->id == $this->author);
+    }
+
+    public function getComments()
+    {
+        return Comments::find()->where('article_id = :id', [':id' => $this->id]);
+    }
+
+    public function setStatus($status = 1)
+    {
+        $this->status = $status;
+        return $this->save(false);
     }
 }

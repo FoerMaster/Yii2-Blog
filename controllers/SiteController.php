@@ -20,9 +20,6 @@ use app\models\Comments;
 use yii\web\NotFoundHttpException;
 class SiteController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
     public function behaviors()
     {
         return [
@@ -46,9 +43,8 @@ class SiteController extends Controller
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /* ////////////////////// ACTIONS /////////////////////// */
+
     public function actions()
     {
         return [
@@ -62,36 +58,9 @@ class SiteController extends Controller
         ];
     }
 
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
-    public function actionIndex()
-    {
-        $query = Articles::find();
-        $pagination = new Pagination(['totalCount'=>$query->count(),'pageSize'=>8]);
-
-        $articles = $query
-            ->offset($pagination->offset)
-            ->limit($pagination->limit)
-            ->all();
-
-        $query2 = Articles::find();
-        $toparticle = $query2
-            ->orderBy(['date' => SORT_DESC])
-            ->one();
-            
-        return $this->render('index',[
-            'articles'=>$articles,
-            'pagination'=>$pagination,
-            'toparticle'=>$toparticle]
-        );
-    }
-
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
+        if (!$this->isGuest()) {
             return $this->goHome();
         }
 
@@ -109,14 +78,17 @@ class SiteController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
-
         return $this->goHome();
     }
 
     public function actionRegister()
     {
+
+        if (!$this->isGuest()) {
+            return $this->goHome();
+        }
+
         $model = new RegisterForm();
- 
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->register()) {
                 if (Yii::$app->getUser()->login($user,3600*24*30)) {
@@ -124,25 +96,39 @@ class SiteController extends Controller
                 }
             }
         }
- 
         return $this->render('register', [
             'model' => $model,
         ]);
     }
 
+    public function actionIndex()
+    {
+        $query = Articles::find();
+        $pagination = new Pagination(['totalCount'=>$query->count(),'pageSize'=>9]);
+
+        $articles = $this->getArticles($pagination);
+        $toparticle = $this->getLastArticle();
+            
+        return $this->render('index',[
+            'articles'=>$articles,
+            'pagination'=>$pagination,
+            'toparticle'=>$toparticle]
+        );
+    }
+
     public function actionPost($id)
     {
-        $article = Articles::find()->where('id = :id', [':id' => $id])->one();
+        $article = $this->getArticle($id);
+
         $commentForm = new CommentForm();
 
 
-        $query = Comments::find();
-        $pagination = new Pagination(['totalCount'=>$query->count(),'pageSize'=>5]);
+        $query = $article->getComments();
+        $pagination = new Pagination(['totalCount'=>$query->count(),'pageSize'=>6]);
 
         $comments = $query
             ->offset($pagination->offset)
             ->limit($pagination->limit)
-            ->where('article_id = :id', [':id' => $id])
             ->all();
 
         return $this->render('post',[
@@ -172,15 +158,6 @@ class SiteController extends Controller
         return $this->render('avatar',['model'=>$model]);
     }
 
-    protected function findModel($id)
-    {
-        if (($model = User::findOne($id)) !== null) {
-            return $model;
-        }
-
-        throw new NotFoundHttpException('The requested page does not exist.');
-    }
-
     public function actionComment($id)
     {
         $model = new CommentForm();
@@ -194,4 +171,43 @@ class SiteController extends Controller
             }
         }
     }
+
+    /* ////////////////////// HELP /////////////////////// */
+
+    protected function findModel($id)
+    {
+        if (($model = User::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    protected function isGuest()
+    {
+        return Yii::$app->user->isGuest;
+    }
+
+    protected function getArticles($pagination)
+    {
+        $query = Articles::find()->where('status = :status', [':status' => 1]);
+        $pagination = new Pagination(['totalCount'=>$query->count(),'pageSize'=>9]);
+
+        return $query->offset($pagination->offset)->limit($pagination->limit)->all(); 
+    }
+
+    protected function getLastArticle()
+    {
+        $query_toparticle = Articles::find();
+        return $query_toparticle
+            ->orderBy(['date' => SORT_DESC])
+            ->where('status = :status', [':status' => 1])
+            ->one();
+    }
+
+    protected function getArticle($id)
+    {
+        return Articles::find()->where('id = :id', [':id' => $id])->one();
+    }
+
 }

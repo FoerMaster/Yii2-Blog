@@ -10,7 +10,7 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Регистрация';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-register">
+<div class="site-register" style='background-color: white;padding: 19px;'>
     <h1><?= Html::encode($this->title) ?></h1>
     <div class="row">
         <div class="col-lg-5">
