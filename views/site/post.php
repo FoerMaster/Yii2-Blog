@@ -4,9 +4,7 @@
 use yii\widgets\LinkPager;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\bootstrap\ActiveForm;
-use franciscomaya\sceditor\SCEditor;
-use jbbcode\jbbcode\Parser;
+
 $this->title = $article->title;
 ?>
 <div class="site-index">
@@ -31,25 +29,11 @@ $this->title = $article->title;
 
         <hr class='c-hr'>
 
-        <?=LinkPager::widget(['pagination' =>$pagination,]);?>
-
         <?php foreach($comments as $comment):?>
-            <div class='comment-card'>
-                <div class="meta">
-                    <img src="<?= Yii::getAlias('@web').'/storage/'.$comment->getAuthorModel()->avatar ?>" >
-                    <p class="name"><?= $comment->getAuthorModel()->login?></p>
-                    <p class="date"><?= date("d.m.Y", strtotime($comment->date))?></p>
-                </div>
-                <div class="data">
-                    <? $parser = new JBBCode\Parser();
-                       $parser->addCodeDefinitionSet(new JBBCode\DefaultCodeDefinitionSet());
-                       $parser->parse(Html::encode($comment->content));
-                    ?>
-                    <h3><?= $parser->getAsHtml() ?></h3>
-                </div>
-            </div>
+            <?= $this->render('/parts/comment',['comment' => $comment]); ?>
         <?php endforeach;?>
 
+        <?=LinkPager::widget(['pagination' =>$pagination,]);?>
         <?php $form = \yii\widgets\ActiveForm::begin([
             'action'=>['site/comment', 'id'=>$article->id],
             'options'=>['class'=>'form-horizontal contact-form', 'role'=>'form']])?>

@@ -18,6 +18,7 @@ use app\models\ImageUpload;
 use yii\web\UploadedFile;
 use app\models\Comments;
 use yii\web\NotFoundHttpException;
+use yii\web\BadRequestHttpException;
 class SiteController extends Controller
 {
     public function behaviors()
@@ -108,9 +109,11 @@ class SiteController extends Controller
 
         $articles = $this->getArticles($pagination);
         $toparticle = $this->getLastArticle();
+        $users = User::find()->all();
             
         return $this->render('index',[
             'articles'=>$articles,
+            'users' => $users,
             'pagination'=>$pagination,
             'toparticle'=>$toparticle]
         );
@@ -172,6 +175,25 @@ class SiteController extends Controller
         }
     }
 
+    /* ////////////////////// SEARCH / FILTER /////////////////////// */
+
+    public function actionFilter($sort = 1,$author = 0)
+    {
+        $query = Articles::find();
+        $pagination = new Pagination(['totalCount'=>$query->count(),'pageSize'=>9]);
+        $users = User::find()->all();
+        $articles = $this->getArticles($pagination,$sort,$author);
+        $filters = [
+            'sort' => $sort,
+            'author' => $author
+        ];
+        return $this->render('index',[
+            'articles'=>$articles,
+            'users' => $users,
+            'pagination'=>$pagination,
+            'filters'=>$filters]
+        );
+    }
     /* ////////////////////// HELP /////////////////////// */
 
     protected function findModel($id)
@@ -188,12 +210,25 @@ class SiteController extends Controller
         return Yii::$app->user->isGuest;
     }
 
-    protected function getArticles($pagination)
+    protected function getArticles($pagination,$sort = 1,$author = 0)
     {
-        $query = Articles::find()->where('status = :status', [':status' => 1]);
+        $sorting = SORT_DESC;
+        if($sort == 1){
+            $sorting = SORT_DESC;
+        } else {
+            $sorting = SORT_ASC;
+        }
+
+        $query = Articles::find();
         $pagination = new Pagination(['totalCount'=>$query->count(),'pageSize'=>9]);
 
-        return $query->offset($pagination->offset)->limit($pagination->limit)->all(); 
+        if($author != 0){
+            return $query->orderBy([ 'date' => $sorting ])->offset($pagination->offset)->limit($pagination->limit)->where(['author' => intval($author),'status' => 1])->all();
+        }else{
+            return $query->orderBy([ 'date' => $sorting ])->offset($pagination->offset)->limit($pagination->limit)->where('status = :status', [':status' => 1])->all(); 
+        }
+
+        
     }
 
     protected function getLastArticle()

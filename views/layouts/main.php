@@ -23,6 +23,7 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -30,15 +31,16 @@ AppAsset::register($this);
 <div class="warp">
     <?php
     NavBar::begin([
-        'brandLabel' => "[#]",
+        'brandImage' => "http://blog.com.test/images/logo.png",
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-inverse c-nav',
+            'class' => 'navbar-inverse c-nav navbar-fixed-top',
         ],
     ]);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
+            Yii::$app->user->isGuest ? ['label' => 'Регистрация', 'url' => ['/site/register']] : ['label' => 'Добавить пост', 'url' => ['/profile/articles/create']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Авторизация', 'url' => ['/site/login']]
             ) : (
@@ -48,7 +50,7 @@ AppAsset::register($this);
     ]);
     NavBar::end();
     ?>
-
+    <img class="head-img" src="http://blog.com.test/images/head.png">
     <div class="container">
         <?= $content ?>
     </div>
