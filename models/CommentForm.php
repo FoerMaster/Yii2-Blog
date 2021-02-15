@@ -21,7 +21,7 @@ class CommentForm extends Model
     {
         $comment = new Comments;
         $comment->content = $this->content;
-        $comment->author = !Yii::$app->user->isGuest ? Yii::$app->user->id : 2;
+        $comment->author = !Yii::$app->user->isGuest ? Yii::$app->user->id : 1;
         $comment->article_id = $article_id;
         $comment->date = date('Y-m-d');
         return $comment->save();

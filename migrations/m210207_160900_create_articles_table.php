@@ -21,6 +21,7 @@ class m210207_160900_create_articles_table extends Migration
             'image' =>          $this->string()->defaultValue(null),
             'date' =>           $this->date(),
         ]);
+             
     }
 
     /**
