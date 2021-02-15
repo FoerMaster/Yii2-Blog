@@ -14,18 +14,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Создать запись', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <p><?= Html::a('Создать запись', ['create'], ['class' => 'btn btn-success']) ?></p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            
-            ['class' => 'yii\grid\SerialColumn'],
             [
                 'format' => 'html',
                 'label' => 'Автор',
@@ -34,16 +30,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             'title',
-            'content:ntext',
             [
                 'format' => 'html',
-                'label' => 'Картинка',
+                'label' => 'Контент',
+                'contentOptions'=>['style'=>'max-height: 80px;'],
                 'value' => function($data){
-                    return Html::img('/storage/'.$data->image,['width'=>200]);
+                    return $data->content;
                 }
             ],
-            
-            //'date',
+
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

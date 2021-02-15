@@ -44,7 +44,6 @@ class SiteController extends Controller
         ];
     }
 
-    /* ////////////////////// ACTIONS /////////////////////// */
 
     public function actions()
     {
@@ -59,11 +58,11 @@ class SiteController extends Controller
         ];
     }
 
+    /* ////////////////////// ACTIONS /////////////////////// */
+
     public function actionLogin()
     {
-        if (!$this->isGuest()) {
-            return $this->goHome();
-        }
+        $this->checkGuest();
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
@@ -85,9 +84,7 @@ class SiteController extends Controller
     public function actionRegister()
     {
 
-        if (!$this->isGuest()) {
-            return $this->goHome();
-        }
+        $this->checkGuest();
 
         $model = new RegisterForm();
         if ($model->load(Yii::$app->request->post())) {
@@ -122,10 +119,7 @@ class SiteController extends Controller
     public function actionPost($id)
     {
         $article = $this->getArticle($id);
-
         $commentForm = new CommentForm();
-
-
         $query = $article->getComments();
         $pagination = new Pagination(['totalCount'=>$query->count(),'pageSize'=>6]);
 
@@ -147,7 +141,7 @@ class SiteController extends Controller
         $id = Yii::$app->user->identity->id;
         $model = new ImageUpload;
         if(Yii::$app->request->isPost){
-            $usr = $this->findModel($id);
+            $usr = $this->getUser($id);
             $file = UploadedFile::getInstance($model,'image');
 
             if($usr->getImage()){
@@ -196,7 +190,7 @@ class SiteController extends Controller
     }
     /* ////////////////////// HELP /////////////////////// */
 
-    protected function findModel($id)
+    public function getUser($id)
     {
         if (($model = User::findOne($id)) !== null) {
             return $model;
@@ -205,12 +199,19 @@ class SiteController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    protected function isGuest()
+    public function isGuest()
     {
         return Yii::$app->user->isGuest;
     }
+    
+    public function checkGuest()
+    {
+        if (!$this->isGuest()) {
+            return $this->goHome();
+        }
+    }
 
-    protected function getArticles($pagination,$sort = 1,$author = 0)
+    public function getArticles($pagination,$sort = 1,$author = 0)
     {
         $sorting = SORT_DESC;
         if($sort == 1){
@@ -231,7 +232,7 @@ class SiteController extends Controller
         
     }
 
-    protected function getLastArticle()
+    public function getLastArticle()
     {
         $query_toparticle = Articles::find();
         return $query_toparticle
@@ -240,7 +241,7 @@ class SiteController extends Controller
             ->one();
     }
 
-    protected function getArticle($id)
+    public function getArticle($id)
     {
         return Articles::find()->where('id = :id', [':id' => $id])->one();
     }

@@ -25,7 +25,7 @@ $this->title = $article->title;
         $parser2->addCodeDefinitionSet(new JBBCode\DefaultCodeDefinitionSet());
         $parser2->parse(Html::encode($article->content));?>
 
-        <p class="v-post-content"><?= $parser2->getAsHtml()?></p>
+        <div class="v-post-content"><?= $parser2->getAsHtml()?></div>
 
         <hr class='c-hr'>
 

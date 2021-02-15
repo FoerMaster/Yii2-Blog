@@ -1,7 +1,7 @@
 <?php
 
 namespace app\modules\profile\controllers;
-
+use app\controllers\SiteController;
 use Yii;
 use app\models\Articles;
 use app\models\ActiclesSearch;
