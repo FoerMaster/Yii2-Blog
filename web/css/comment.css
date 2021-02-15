@@ -1,0 +1,40 @@
+.comment-card{
+    width: 100%;
+    float: left;
+    margin: 5px 3px 30px 4px;
+    min-height: 108px;
+    padding: 14px;
+    border: 2px solid #2b2f38;
+    border-radius: 7px;
+}
+
+.comment-card .data > h3 {
+    overflow: hidden;
+    font-size: 18px;
+    color: #7c8494;
+    line-clamp: 2;
+    -webkit-line-clamp: 5;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-left: 33px;
+    margin-top: 18px;
+}
+
+.meta > img{
+    width: 25px;
+    height: 25px;
+    border-radius: 9999px;
+    float:left;
+    margin-right: 7px;
+    
+}
+
+.meta .name{
+    color: hsla(0,0%,100%,.75);
+    margin-bottom: 0px;
+    line-height: 13px;
+}
+.meta .date{
+    color: #7c8494;
+}

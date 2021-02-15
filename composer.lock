@@ -4,14 +4,14 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9cd87f007dcd9d8cf647fb718b0384f8",
+    "content-hash": "2df063b7252c59980e3b23be6c566f00",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
             "version": "v3.4.1",
             "source": {
                 "type": "git",
-                "url": "git@github.com:twbs/bootstrap.git",
+                "url": "https://github.com/twbs/bootstrap.git",
                 "reference": "68b0d231a13201eb14acd3dc84e51543d16e5f7e"
             },
             "dist": {
@@ -351,6 +351,98 @@
                 "html"
             ],
             "time": "2020-06-29T00:56:53+00:00"
+        },
+        {
+            "name": "franciscomaya/yii2-sceditor",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/franciscomaya/yii2-sceditor.git",
+                "reference": "949328707498004a9fd3b77f595d2d5af2da074f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/franciscomaya/yii2-sceditor/zipball/949328707498004a9fd3b77f595d2d5af2da074f",
+                "reference": "949328707498004a9fd3b77f595d2d5af2da074f",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "franciscomaya\\sceditor\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Francisco Maya Sarasty",
+                    "email": "sarasty@gmail.com"
+                }
+            ],
+            "description": "SCEditor, a lightweight WYSIWYG BBCode & HTML editor extension for Yii 2.0 Framework",
+            "keywords": [
+                "bbcode",
+                "extension",
+                "sceditor",
+                "xhtml",
+                "yii",
+                "yii2"
+            ],
+            "time": "2015-09-02T21:27:48+00:00"
+        },
+        {
+            "name": "jbbcode/jbbcode",
+            "version": "v1.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jbowens/jBBCode.git",
+                "reference": "d9a132e7886a11cf997e3ec025a41bdf97899704"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jbowens/jBBCode/zipball/d9a132e7886a11cf997e3ec025a41bdf97899704",
+                "reference": "d9a132e7886a11cf997e3ec025a41bdf97899704",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.1",
+                "phpunit/phpunit": "4.5.*",
+                "satooshi/php-coveralls": "0.6.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "JBBCode": "."
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jackson Owens",
+                    "email": "jackson_owens@alumni.brown.edu",
+                    "homepage": "http://jbowens.org/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A lightweight but extensible BBCode parser written in PHP 5.3.",
+            "homepage": "http://jbbcode.com/",
+            "keywords": [
+                "BB",
+                "bbcode"
+            ],
+            "time": "2020-06-19T16:09:00+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -1115,26 +1207,26 @@
     "packages-dev": [
         {
             "name": "behat/gherkin",
-            "version": "v4.7.2",
+            "version": "v4.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/Gherkin.git",
-                "reference": "d1ff9aa23bb280e8aee9118d42eec386d6f851f7"
+                "reference": "2391482cd003dfdc36b679b27e9f5326bd656acd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Gherkin/zipball/d1ff9aa23bb280e8aee9118d42eec386d6f851f7",
-                "reference": "d1ff9aa23bb280e8aee9118d42eec386d6f851f7",
+                "url": "https://api.github.com/repos/Behat/Gherkin/zipball/2391482cd003dfdc36b679b27e9f5326bd656acd",
+                "reference": "2391482cd003dfdc36b679b27e9f5326bd656acd",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6"
+                "php": "~7.2|~8.0"
             },
             "require-dev": {
                 "cucumber/cucumber": "dev-gherkin-16.0.0",
-                "phpunit/phpunit": "^5.7.1|~6|~7",
-                "symfony/phpunit-bridge": "~2.7|~3|~4",
-                "symfony/yaml": "~2.3|~3|~4"
+                "phpunit/phpunit": "~8|~9",
+                "symfony/phpunit-bridge": "~3|~4|~5",
+                "symfony/yaml": "~3|~4|~5"
             },
             "suggest": {
                 "symfony/yaml": "If you want to parse features, represented in YAML files"
@@ -1171,7 +1263,7 @@
                 "gherkin",
                 "parser"
             ],
-            "time": "2021-02-03T16:10:01+00:00"
+            "time": "2021-02-04T12:44:21+00:00"
         },
         {
             "name": "codeception/codeception",
@@ -4967,7 +5059,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "franciscomaya/yii2-sceditor": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

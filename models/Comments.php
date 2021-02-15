@@ -8,43 +8,37 @@ use Yii;
  * This is the model class for table "comments".
  *
  * @property int $id
- * @property string|null $text
- * @property int|null $uid
- * @property int|null $aid
- * @property int|null $status
+ * @property int|null $author
+ * @property string|null $content
+ * @property string|null $date
  */
 class Comments extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function tableName()
     {
         return 'comments';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
-            [['uid', 'aid', 'status'], 'integer'],
-            [['text'], 'string', 'max' => 255],
+            [['date'],'date','format'=>'php:Y-m-d'],
+            [['date'],'default','value'=>date('Y-m-d')],
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
+    public function getAuthorModel()
     {
-        return [
-            'id' => 'ID',
-            'text' => 'Text',
-            'uid' => 'Uid',
-            'aid' => 'Aid',
-            'status' => 'Status',
-        ];
+        return $this->findUser($this->author);
     }
+
+    protected function findUser($id)
+    {
+        if (($model = User::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+    
 }

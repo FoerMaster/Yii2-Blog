@@ -1,0 +1,43 @@
+.profile-card{
+    display: flex;
+    height: 208px;
+}
+
+.profile-card > img{
+    width: 200px;
+    height: 200px;
+    margin-right: 10px;
+    border-radius: 10999px;
+}
+
+.profile-meta {
+    padding: 30px;
+}
+
+.profile-meta .name{
+    color: white;
+    font-weight: 600;
+    font-size: 50px;
+}
+
+.profile-meta .name > a{
+    color:white;
+    background-color: red;
+    border-radius: 8.8px;
+    font-size: 23px;
+    padding: 8px;
+    font-weight: 100;
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+.profile-meta .name > a:hover{
+    color:white;
+    text-decoration: none;
+}
+
+.profile-meta .date{
+    color: #ffffff8a;
+    margin: 0px;
+    font-size: 18px;
+}
