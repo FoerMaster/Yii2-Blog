@@ -107,10 +107,16 @@ class SiteController extends Controller
         $articles = $this->getArticles($pagination);
         $toparticle = $this->getLastArticle();
         $users = User::find()->all();
+
+        $filters = [
+            'sort' => 1,
+            'author' => 0
+        ];
             
         return $this->render('index',[
             'articles'=>$articles,
             'users' => $users,
+            'filters' => $filters,
             'pagination'=>$pagination,
             'toparticle'=>$toparticle]
         );
