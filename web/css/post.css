@@ -15,6 +15,7 @@
     overflow: hidden;
     position: relative;
     display: inline-block;
+    border-radius: 10px;
 }
 .v-post-title{
     position: relative;

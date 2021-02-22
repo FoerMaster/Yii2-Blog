@@ -21,7 +21,7 @@ $this->title = $article->title;
             </a>
         </div>
 
-        <?$parser2 = new JBBCode\Parser();
+        <?php $parser2 = new JBBCode\Parser();
         $parser2->addCodeDefinitionSet(new JBBCode\DefaultCodeDefinitionSet());
         $parser2->parse(Html::encode($article->content));?>
 

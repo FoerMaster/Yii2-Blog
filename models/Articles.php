@@ -79,7 +79,8 @@ class Articles extends \yii\db\ActiveRecord
     public function delImage()
     {
         $image = $this->getImage();
-        if($image){
+
+        if($image && $this->image != "no-image.png"){
             unlink($image);
         }
     }

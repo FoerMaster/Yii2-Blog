@@ -14,11 +14,11 @@ use yii\web\NotFoundHttpException;
 class DefaultController extends Controller
 {
 
-    public function actionIndex($id)
+    public function actionIndex($id = 0)
     {
         $user = $this->findModel($id);
         $posts = Articles::find()->where('author = :id AND status = 1', [':id' => $user->id])->all();
-        if ($id == Yii::$app->user->identity->id){
+        if (!empty(Yii::$app->user->identity->id) && $id == Yii::$app->user->identity->id){
             $posts = Articles::find()->where('author = :id', [':id' => $user->id])->all();
         }
         

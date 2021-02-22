@@ -4,6 +4,7 @@
 use yii\widgets\LinkPager;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use app\components\postCard;
 $this->title = 'Foer Blog';
 ?>
 
@@ -12,7 +13,8 @@ $this->title = 'Foer Blog';
     <div class="body-content  animate__animated animate__fadeIn">
         <div class="row">
             <?php foreach($articles as $article):?>
-                <?= $this->render('/parts/postcard',['article' => $article]); ?>
+                
+                <?= postCard::widget(['article' => $article]) ?>
             <?php endforeach;?>
         </div>
         <?= LinkPager::widget(['pagination' =>$pagination,]);?>
