@@ -55,7 +55,7 @@ class Articles extends \yii\db\ActiveRecord
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException('Ошибка базы данных!.');
     }
 
     public function getImage(){
