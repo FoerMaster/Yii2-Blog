@@ -30,14 +30,6 @@ $this->title = 'Ваши посты';
                 }
             ],
             'title',
-            [
-                'format' => 'html',
-                'label' => 'Контент',
-                'contentOptions'=>['style'=>'max-height: 80px;'],
-                'value' => function($data){
-                    return $data->content;
-                }
-            ],
 
 
             ['class' => 'yii\grid\ActionColumn'],

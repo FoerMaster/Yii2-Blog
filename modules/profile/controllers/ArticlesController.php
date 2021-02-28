@@ -44,7 +44,6 @@ class ArticlesController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
                 ],
             ],
         ];
@@ -76,7 +75,7 @@ class ArticlesController extends Controller
         $model = $this->findModel($id);
 
         if($model->HasAccess()){
-            return $this->redirect(['user/index']);
+            return $this->redirect('../../post?id='.$id); //Я без поняти как это сделать, т.к при обычном рендере у меня еррор и не пускает к Main View
         }else{
             throw new NotAcceptableHttpException('У вас нет прав для редактирования!');  
         }

@@ -13,7 +13,7 @@ use kartik\file\FileInput;
     <?= $form->field($model, 'image')->widget(FileInput::classname(), ['options' => ['accept' => 'image/*'],]);?>
 
     <div class="form-group">
-        <?= Html::submitButton('Загрузить', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Загрузить', ['class' => 'button-prim']) ?>
     </div>
     <?php ActiveForm::end(); ?>
 </div>

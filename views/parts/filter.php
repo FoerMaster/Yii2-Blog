@@ -20,6 +20,8 @@
 
         <?= Html::tag('p', "Фильтр по автору") ?>
 
+        <?= Html::a('<p class="filter-b">Все</p>', ['/site/filter', 'author' => 0,'sort' => $filters['sort']]) ?>
+
         <?php foreach($users as $user):?>
 
             <?= Html::a('<p class="filter-b">'.$user->login.'</p>', ['/site/filter', 'author' => $user->id,'sort' => $filters['sort']]) ?>

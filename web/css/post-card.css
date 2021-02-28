@@ -16,11 +16,14 @@
     border-radius: 5px;
 
 }
-
+.v-post-content > img{
+    max-width: 100%;
+}
 .post-card .data > h4 {
     Color:hsla(0,0%,100%,.85);
     font-size: 2.2rem;
     margin-bottom: -14px;
+    word-wrap: break-word;
 }
 
 .post-card .data > h3 {

@@ -111,8 +111,7 @@ class SiteController extends Controller
 
         $articles = $this->getArticles($pagination);
         $toparticle = $this->getLastArticle();
-        $users = User::find()->all();
-        unset($users[0]); 
+        $users = User::find()->where("id != 1")->all();
         $filters = [
             'sort' => 1,
             'author' => 0
@@ -178,6 +177,7 @@ class SiteController extends Controller
                 return $this->redirect(['site/post','id'=>$id]);
             }
         }
+
     }
 
     /* ////////////////////// SEARCH / FILTER /////////////////////// */
@@ -186,7 +186,7 @@ class SiteController extends Controller
     {
         $query = Articles::find();
         $pagination = new Pagination(['totalCount'=>$query->count(),'pageSize'=>9]);
-        $users = User::find()->all();
+        $users = User::find()->where("id != 1")->all();
         $articles = $this->getArticles($pagination,$sort,$author);
         $filters = [
             'sort' => $sort,
@@ -220,6 +220,7 @@ class SiteController extends Controller
         if (!$this->isGuest()) {
             return $this->goHome();
         }
+        return true;
     }
 
     public function getArticles($pagination,$sort = 1,$author = 0)

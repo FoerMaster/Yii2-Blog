@@ -13,15 +13,15 @@ $this->title = $user->login;
         <p class="date">Постов: <?= count($posts)?></p>
         <!-- Очень плохое решение, но иного исхода я не нашел :( -->
         <br>
-        <div class="row">
-
-            <?php if(!empty(Yii::$app->user->identity->id) && $user->id == Yii::$app->user->identity->id) echo Html::a('Обновить аватар', ['/site/avatar'],['class'=>'button-prim']); ?>
-            <?php if(!empty(Yii::$app->user->identity->id) && $user->id == Yii::$app->user->identity->id) echo Html::a('Открыть список постов', ['/profile/articles'],['class'=>'button-prim']); ?>
-            <?php if(!empty(Yii::$app->user->identity->id) && $user->id == Yii::$app->user->identity->id) echo "<form action='/site/logout' style='float: left;' method='post'><input type='hidden' name='_csrf' value='".Yii::$app->request->getCsrfToken()."' /><p><input class='button-red' type='submit' value='Выйти'></p></form>"; ?>
-        </div>
     </div>
-</div>
 
+</div>
+<form action='/site/logout' method='post'>
+
+    <?php if(!empty(Yii::$app->user->identity->id) && $user->id == Yii::$app->user->identity->id) echo Html::a('Обновить аватар', ['/site/avatar'],['class'=>'button-prim']); ?>
+    <?php if(!empty(Yii::$app->user->identity->id) && $user->id == Yii::$app->user->identity->id) echo Html::a('Открыть список постов', ['/profile/articles'],['class'=>'button-prim']); ?>
+    <?php if(!empty(Yii::$app->user->identity->id) && $user->id == Yii::$app->user->identity->id) echo "<input type='hidden' name='_csrf' value='".Yii::$app->request->getCsrfToken()."' /><p><input class='button-red' type='submit' value='Выйти'></p>"; ?>
+</form>
 <hr class='c-hr'>
 
 <div class="row">

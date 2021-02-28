@@ -61,7 +61,9 @@
 .comment-form{
     padding: 10px;
 }
-
+.word-warp{
+    word-wrap: break-word;
+}
 .mob-top .meta{
     position: relative;
     color: white;

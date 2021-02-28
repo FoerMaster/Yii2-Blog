@@ -19,7 +19,7 @@ $this->title = $article->title;
         </div>
     <?php endif;?>
     <div class="body-content" style="color:white">
-        <div class="mob-top visible-xs">
+        <div class="mob-top word-warp visible-xs">
             <h1 class="v-post-title"><?php echo $article->title?></h1>
 
             <a href="<?= Url::to(['/profile', 'id' => $article->getAuthorModel()->id]);?>" class="meta">

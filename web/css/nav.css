@@ -3,7 +3,7 @@
 }
 .c-nav .navbar-header .navbar-brand{
     color: white;
-    font-weight: 500px;
+    font-weight: 500;
     font-size: 16px;
 }
 
@@ -11,5 +11,5 @@
     color: white;
     border-radius: 988px;
     width: 37px;
-    margin: 6.5px;
+    margin: 7px;
 }
