@@ -15,6 +15,7 @@
     overflow: hidden;
     position: relative;
     display: inline-block;
+    border-radius: 10px;
 }
 .v-post-title{
     position: relative;
@@ -25,26 +26,23 @@
 }
 
 .v-post-content{
+    width: 100%;
     color:#aabcde;
     font-size: 21px;
     white-space: pre-wrap;
     margin-top: 30px;
-    margin-bottom: 0px;
+    margin-bottom: 100px;
     display: inline-grid;
 }
 
 .v-post-content > img{
     width: 708px;
-    margin: auto;
-    margin-top: 40px;
-    margin-bottom: 40px;
+    margin: 40px auto;
 }
 
 .v-post-content > ol > li > img{
     width: 708px;
-    margin: auto;
-    margin-top: 40px;
-    margin-bottom: 40px;
+    margin: 40px auto;
 }
 
 .v-post-image-overlay .meta{
@@ -58,4 +56,53 @@
 .v-post-image-overlay .meta > p > img{
     border-radius: 71px;
     width: 54px;
+}
+
+.comment-form{
+    padding: 10px;
+}
+
+.mob-top .meta{
+    position: relative;
+    color: white;
+    top: 32%;
+}
+
+
+.mob-top .v-post-title{
+    text-align: left;
+}
+
+.mob-top .meta > p > img{
+    border-radius: 71px;
+    width: 32px;
+    float:left;
+    margin-right: 10px;
+}
+
+.toolbox {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    width: 47px;
+    height: auto;
+    opacity: 0.4;
+    padding: 5px;
+    background-color: #000000;
+    z-index: 999;
+}
+
+.toolbox a{
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 26px;
+    margin: 6px;
+    transition-duration: .4s;
+    color: #8b8b8b;
+}
+
+.toolbox a:hover{
+    color: #fff;
+    transition-duration: .4s;
 }

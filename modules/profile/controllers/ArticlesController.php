@@ -1,7 +1,6 @@
 <?php
 
 namespace app\modules\profile\controllers;
-use app\controllers\SiteController;
 use Yii;
 use app\models\Articles;
 use app\models\ActiclesSearch;
@@ -62,7 +61,7 @@ class ArticlesController extends Controller
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $dataProvider
         ]);
     }
 
@@ -77,9 +76,7 @@ class ArticlesController extends Controller
         $model = $this->findModel($id);
 
         if($model->HasAccess()){
-            return $this->render('view', [
-                'model' => $model,
-            ]);
+            return $this->redirect(['user/index']);
         }else{
             throw new NotAcceptableHttpException('У вас нет прав для редактирования!');  
         }

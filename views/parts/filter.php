@@ -1,20 +1,30 @@
 <?
-use yii\helpers\Html;
-use yii\helpers\Url;
-unset($users[0]); //Ссори костыль, но лучшего варианта я не нашел :/
-// getArticles($pagination,$sort = 1,$author = 0)
+    use yii\helpers\Html;
 ?>
-<div class="row" style="position: relative;">
+<div class="row c-row">
     <a id="t-filter" class="filter-button">
         <i class="fas fa-filter"></i>
     </a>
+
     <div id='filter' class='filter'>
-        <p>Фильтр по дате</p>
-        <a href="<?= Url::to(['/site/filter', 'author' => $filters['author'],'sort' => 1]);?>"><p class="filter-b">Сначала новые <i class="fas fa-sort-numeric-down-alt"></i></p></a>
-        <a href="<?= Url::to(['/site/filter', 'author' => $filters['author'],'sort' => 0]);?>"><p class="filter-b">Сначала старые <i class="fas fa-sort-numeric-up"></i></p></a>
-        <p>Фильтр по автору</p>
+
+        <?= Html::a('<p class="filter-b">Сбросить фильтры <i class="fas fa-sync-alt"></i></p>', ['/site/filter', 'author' => 0,'sort' => 1]) ?>
+
+        <?= Html::tag('p', "Фильтр по дате") ?>
+
+
+
+        <?= Html::a('<p class="filter-b">Сначала новые <i class="fas fa-sort-numeric-down-alt"></i></p>', ['/site/filter', 'author' => $filters['author'],'sort' => 1]) ?>
+        <?= Html::a('<p class="filter-b">Сначала старые <i class="fas fa-sort-numeric-up"></i></p>', ['/site/filter', 'author' => $filters['author'],'sort' => 0]) ?>
+        <!-- Не очень рациональное решение, но делать отдельный виджет ради 2-ух кнопок, такое себе -->
+
+        <?= Html::tag('p', "Фильтр по автору") ?>
+
         <?php foreach($users as $user):?>
-            <a href="<?= Url::to(['/site/filter', 'author' => $user->id,'sort' => $filters['sort']]);?>"><p class="filter-b"><?= $user->login ?></p></a>
+
+            <?= Html::a('<p class="filter-b">'.$user->login.'</p>', ['/site/filter', 'author' => $user->id,'sort' => $filters['sort']]) ?>
+
         <?php endforeach;?>
+
     </div>
 </div>

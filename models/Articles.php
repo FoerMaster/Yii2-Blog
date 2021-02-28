@@ -55,7 +55,7 @@ class Articles extends \yii\db\ActiveRecord
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException('Ошибка базы данных!.');
     }
 
     public function getImage(){
@@ -79,7 +79,8 @@ class Articles extends \yii\db\ActiveRecord
     public function delImage()
     {
         $image = $this->getImage();
-        if($image){
+
+        if($image && $this->image != "no-image.png"){
             unlink($image);
         }
     }

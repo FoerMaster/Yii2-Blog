@@ -2,10 +2,10 @@
 
 namespace app\controllers;
 
+use bupy7\bbcode\BBCodeBehavior;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
-use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\RegisterForm;
@@ -16,9 +16,8 @@ use app\models\CommentForm;
 use app\models\User;
 use app\models\ImageUpload;
 use yii\web\UploadedFile;
-use app\models\Comments;
 use yii\web\NotFoundHttpException;
-use yii\web\BadRequestHttpException;
+
 class SiteController extends Controller
 {
     public function behaviors()
@@ -40,6 +39,11 @@ class SiteController extends Controller
                 'actions' => [
                     'logout' => ['post'],
                 ],
+            ],
+            [
+                'class' => BBCodeBehavior::className(),
+                'attribute' => 'content',
+                'saveAttribute' => 'purified_content',
             ],
         ];
     }
@@ -99,6 +103,7 @@ class SiteController extends Controller
         ]);
     }
 
+
     public function actionIndex()
     {
         $query = Articles::find();
@@ -107,11 +112,17 @@ class SiteController extends Controller
         $articles = $this->getArticles($pagination);
         $toparticle = $this->getLastArticle();
         $users = User::find()->all();
+        unset($users[0]); 
+        $filters = [
+            'sort' => 1,
+            'author' => 0
+        ];
             
         return $this->render('index',[
             'articles'=>$articles,
             'users' => $users,
             'pagination'=>$pagination,
+            'filters' => $filters,
             'toparticle'=>$toparticle]
         );
     }

@@ -1,5 +1,6 @@
 html,
 body {
+    background-color:#191b1f;
     height: 100%;
 }
 
@@ -120,10 +121,9 @@ a.desc:after {
     height:128px;
     background-size:cover;
     background-position-y:center;
-    }
-    
-    .button-red {
-    border:none;
+}
+
+.button-red {
     padding:9px;
     text-align:center;
     text-decoration:none;
@@ -135,15 +135,14 @@ a.desc:after {
     color:#fff;
     border:2px solid #f44336;
     border-radius:6px;
-    }
-    
-    .button-red:hover {
+}
+
+.button-red:hover {
     background-color:#f44336;
     color:#fff;
-    }
-    
-    .button-prim {
-    border:none;
+}
+
+.button-prim {
     padding:9px;
     text-align:center;
     text-decoration:none;
@@ -155,69 +154,66 @@ a.desc:after {
     color:#fff;
     border:2px solid #3672f4;
     border-radius:6px;
-    }
-    
-    .button-prim:hover {
+}
+
+.button-prim:hover {
     background-color:#3672f4;
     color:#fff;
-    }
-    
-    .post-date {
+}
+
+.post-date {
     float:right;
     opacity:.6;
-    }
-    
-    body {
-    background-color:#191b1f;
-    }
-    
-    ::-webkit-scrollbar {
+}
+
+::-webkit-scrollbar {
     width:10px;
-    }
-    
-    ::-webkit-scrollbar-track {
+}
+
+::-webkit-scrollbar-track {
     background:#191b1f;
-    }
-    
-    ::-webkit-scrollbar-thumb {
+}
+
+::-webkit-scrollbar-thumb {
     background:#888;
     border-radius:999px;
     border:3px solid #191b1f;
-    }
-    
-    .pagin-list {
+}
+
+.pagin-list {
     background-color:#3672f4;
-    }
-    
-    .form-control-c {
+}
+
+.form-control-c {
     margin:0 -17px 0 0;
     height:72px;
-    width:1186px;
+    width:100%;
     resize:vertical;
     color:#fff;
     background-color:#282b31;
-    border:#fff;
     border:1px solid #ffffff14;
-    }
-    
-    .form-group {
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.form-group {
     margin-bottom:0;
-    }
-    
-    .pagination {
+}
+
+.pagination {
     display:inline-block;
     padding-left:0;
-    margin:20px 0;
     border-radius:4px;
-    margin-top:40px;
-    }
-    
-    .white-theme {
-    background-color:#fff;
-    padding:19px;
-    }
-    
-    .filter-button {
+    margin: 40px 0 20px;
+}
+
+.white-theme {
+    padding: 19px;
+    color: white;
+    text-align: center;
+}
+
+.filter-button {
     color:#ffffffcf;
     font-size:16px;
     padding:11px;
@@ -229,9 +225,10 @@ a.desc:after {
     height:40px;
     float:right;
     cursor:pointer;
-    }
-    
-    .filter-button:hover {
+    margin-bottom: 30px;
+}
+
+.filter-button:hover {
     color:#fff;
     font-size:16px;
     padding:11px;
@@ -239,9 +236,9 @@ a.desc:after {
     border-radius:4px;
     background-color:#282b31;
     transition:all .1s ease-out;
-    }
-    
-    .filter {
+}
+
+.filter {
     background-color:#32363d;
     width:250px;
     position:absolute;
@@ -254,9 +251,9 @@ a.desc:after {
     padding:10px;
     color:#ffffff7a;
     border:1px solid #ffffff17;
-    }
-    
-    .filter-b {
+}
+
+.filter-b {
     color:#ffffffcf;
     font-size:16px;
     padding:7px;
@@ -267,16 +264,35 @@ a.desc:after {
     cursor:pointer;
     margin-bottom:5px;
     text-align:center;
-    }
-    
-    .filter-b:hover {
+}
+
+.filter-b:hover {
     color:#fff;
     background-color:#282b31;
     transition:all .1s ease-out;
-    }
-    
-    .head-img {
+}
+
+.head-img {
     width:100%;
     margin-bottom:30px;
+    margin-top:50px;
     box-shadow:0 15px 14px #111319;
-    }
+}
+
+.c-d{
+    float: none;
+    margin: 0 auto;
+}
+
+.c-row{
+    position: relative;
+    width: 100%;
+}
+
+.w-full{
+    width: 100%;
+}
+
+.from{
+    color:white;
+}

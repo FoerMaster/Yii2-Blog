@@ -22,7 +22,7 @@
 
 .profile-meta .name > a{
     color:white;
-    background-color: red;
+    background-color: #ff0000;
     border-radius: 8.8px;
     font-size: 23px;
     padding: 8px;
@@ -40,4 +40,82 @@
     color: #ffffff8a;
     margin: 0px;
     font-size: 18px;
+}
+
+@media only screen and (max-width: 768px) {
+
+    .profile-card{
+        display: flex;
+        height: auto;
+    }
+
+    .profile-card > img{
+        width: 75px;
+        height: 76px;
+        margin-right: 10px;
+        border-radius: 10999px;
+    }
+
+    .profile-meta {
+        padding: 0;
+    }
+
+    .profile-meta .name{
+        color: white;
+        font-weight: 600;
+        font-size: 25px;
+        margin: 0;
+    }
+
+    .profile-meta .name > a{
+        color:white;
+        background-color: red;
+        border-radius: 8.8px;
+        font-size: 23px;
+        padding: 8px;
+        font-weight: 100;
+        text-decoration: none;
+        vertical-align: middle;
+    }
+
+    .profile-meta .name > a:hover{
+        color:white;
+        text-decoration: none;
+    }
+
+    .profile-meta .date{
+        color: #ffffff8a;
+        margin: 0;
+        font-size: 12px;
+    }
+
+    .button-prim{
+        width: 100%;
+    }
+
+}
+.table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    color: black;
+    background-color: #ffffff;
+}
+
+.table td, .table th {
+    padding: 8px;
+
+}
+
+.table th {
+
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #010101;
+    color: white;
+}
+.grid-view{
+    color:white;
+    text-align: center;
 }

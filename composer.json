@@ -19,7 +19,8 @@
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
         "franciscomaya/yii2-sceditor": "dev-master",
-        "jbbcode/jbbcode": "^1.4"
+        "jbbcode/jbbcode": "^1.4",
+        "kartik-v/yii2-widget-fileinput": "^1.1"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
@@ -29,6 +30,7 @@
         "codeception/verify": "~0.5.0 || ~1.1.0",
         "codeception/specify": "~0.4.6",
         "symfony/browser-kit": ">=2.7 <=4.2.4",
+        "bupy7/yii2-bbcode": "1.*",
         "codeception/module-filesystem": "^1.0.0",
         "codeception/module-yii2": "^1.0.0",
         "codeception/module-asserts": "^1.0.0"
