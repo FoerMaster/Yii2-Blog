@@ -54,9 +54,7 @@ $this->title = $article->title;
 
         <hr class='c-hr'>
 
-        <?php foreach($comments as $comment):?>
-            <?= $this->render('/parts/comment',['comment' => $comment]); ?>
-        <?php endforeach;?>
+
 
         <?=LinkPager::widget(['pagination' =>$pagination,]);?>
 
@@ -64,7 +62,11 @@ $this->title = $article->title;
             'action'=>['site/comment', 'id'=>$article->id],
             'options'=>['class'=>'form-horizontal contact-form', 'role'=>'form']])?>
             <div class="form-group comment-form">
+
                 <div class="col-md-12">
+                    <?php foreach($comments as $comment):?>
+                        <?= $this->render('/parts/comment',['comment' => $comment]); ?>
+                    <?php endforeach;?>
                     <?= $form->field($commentForm, 'content')->textarea(['class'=>'form-control-c','placeholder'=>'Напишите сообщение...'])->label(false)?>
                 </div>
                 <button type="submit" class="button-prim w-full" >Отправить</button>

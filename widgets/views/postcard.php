@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var $article
+ */
     use yii\helpers\Html;
     use yii\helpers\Url;
 ?>

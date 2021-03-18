@@ -2,7 +2,6 @@
 
 namespace app\controllers;
 
-use app\models\Comments;
 use bupy7\bbcode\BBCodeBehavior;
 use Yii;
 use yii\filters\AccessControl;
@@ -80,20 +79,10 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionLogoust()
+    public function actionLogout()
     {
         Yii::$app->user->logout();
         return $this->goHome();
-    }
-
-    public function actionDelc($id)
-    {
-        $model = $this->getComment($id);
-        $postID = $model->article_id;
-        if((Yii::$app->user->identity->is_admin == 1) ? (True) : (Yii::$app->user->identity->id == $model->author)){
-            $model->delete();
-        }
-        return $this->redirect(['site/post','id'=>$postID]);
     }
 
     public function actionRegister()
@@ -115,24 +104,25 @@ class SiteController extends Controller
     }
 
 
-    public function actionIndex($sort = 1,$author = 0)
+    public function actionIndex()
     {
         $query = Articles::find();
         $pagination = new Pagination(['totalCount'=>$query->count(),'pageSize'=>9]);
 
-        $articles = $this->getArticles($pagination,$sort,$author);
+        $articles = $this->getArticles($pagination);
+        $toparticle = $this->getLastArticle();
         $users = User::find()->where("id != 1")->all();
         $filters = [
-            'sort' => $sort,
-            'author' => $author
+            'sort' => 1,
+            'author' => 0
         ];
             
         return $this->render('index',[
             'articles'=>$articles,
             'users' => $users,
             'pagination'=>$pagination,
-            'filters' => $filters
-            ]
+            'filters' => $filters,
+            'toparticle'=>$toparticle]
         );
     }
 
@@ -190,6 +180,25 @@ class SiteController extends Controller
 
     }
 
+    /* ////////////////////// SEARCH / FILTER /////////////////////// */
+
+    public function actionFilter($sort = 1,$author = 0)
+    {
+        $query = Articles::find();
+        $pagination = new Pagination(['totalCount'=>$query->count(),'pageSize'=>9]);
+        $users = User::find()->where("id != 1")->all();
+        $articles = $this->getArticles($pagination,$sort,$author);
+        $filters = [
+            'sort' => $sort,
+            'author' => $author
+        ];
+        return $this->render('index',[
+            'articles'=>$articles,
+            'users' => $users,
+            'pagination'=>$pagination,
+            'filters'=>$filters]
+        );
+    }
     /* ////////////////////// HELP /////////////////////// */
 
     public function getUser($id)
@@ -248,8 +257,5 @@ class SiteController extends Controller
     {
         return Articles::find()->where('id = :id', [':id' => $id])->one();
     }
-    public function getComment($id)
-    {
-        return Comments::find()->where('id = :id', [':id' => $id])->one();
-    }
+
 }

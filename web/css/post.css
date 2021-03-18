@@ -108,14 +108,3 @@
     color: #fff;
     transition-duration: .4s;
 }
-
-.delete-mess-btn{
-    color: #ffffff24;
-    float: right;
-    transition:all .2s ease-out;
-}
-
-.delete-mess-btn:hover{
-    color: red;
-    transition:all .3s ease-out;
-}
