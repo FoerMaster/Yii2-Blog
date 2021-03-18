@@ -17,7 +17,7 @@ $this->title = $user->login;
     </div>
 
 </div>
-<form action='/site/logout' method='post'>
+<form action='site/logout' method='post'>
 
     <?php if(!empty(Yii::$app->user->identity->id) && $user->id == Yii::$app->user->identity->id) echo Html::a('Обновить аватар', ['/site/avatar'],['class'=>'button-prim']); ?>
     <?php if(!empty(Yii::$app->user->identity->id) && $user->id == Yii::$app->user->identity->id) echo Html::a('Открыть список постов', ['/profile/articles'],['class'=>'button-prim']); ?>
