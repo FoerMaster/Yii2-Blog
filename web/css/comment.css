@@ -1,11 +1,13 @@
 .comment-card{
     width: 100%;
     float: left;
-    margin: 5px 3px 30px 4px;
+    margin: 4px 1px 11px 0px;
+    z-index: 9999;
     min-height: 108px;
     padding: 14px;
     border: 2px solid #2b2f38;
     border-radius: 7px;
+    background-color: #ffffff0d;
 }
 
 .comment-card .data > h3 {
@@ -15,8 +17,8 @@
     line-clamp: 2;
     -webkit-line-clamp: 5;
     display: -webkit-box;
+    word-wrap: break-word;
     -webkit-box-orient: vertical;
-    overflow: hidden;
     margin-left: 33px;
     margin-top: 18px;
 }
@@ -32,7 +34,7 @@
 
 .meta .name{
     color: hsla(0,0%,100%,.75);
-    margin-bottom: 0px;
+    margin-bottom: 0;
     line-height: 13px;
 }
 .meta .date{

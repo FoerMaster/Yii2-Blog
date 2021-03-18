@@ -2,10 +2,10 @@
 
 namespace app\controllers;
 
+use bupy7\bbcode\BBCodeBehavior;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
-use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\RegisterForm;
@@ -16,9 +16,8 @@ use app\models\CommentForm;
 use app\models\User;
 use app\models\ImageUpload;
 use yii\web\UploadedFile;
-use app\models\Comments;
 use yii\web\NotFoundHttpException;
-use yii\web\BadRequestHttpException;
+
 class SiteController extends Controller
 {
     public function behaviors()
@@ -40,6 +39,11 @@ class SiteController extends Controller
                 'actions' => [
                     'logout' => ['post'],
                 ],
+            ],
+            [
+                'class' => BBCodeBehavior::className(),
+                'attribute' => 'content',
+                'saveAttribute' => 'purified_content',
             ],
         ];
     }
@@ -99,6 +103,7 @@ class SiteController extends Controller
         ]);
     }
 
+
     public function actionIndex()
     {
         $query = Articles::find();
@@ -106,8 +111,7 @@ class SiteController extends Controller
 
         $articles = $this->getArticles($pagination);
         $toparticle = $this->getLastArticle();
-        $users = User::find()->all();
-        unset($users[0]); 
+        $users = User::find()->where("id != 1")->all();
         $filters = [
             'sort' => 1,
             'author' => 0
@@ -173,6 +177,7 @@ class SiteController extends Controller
                 return $this->redirect(['site/post','id'=>$id]);
             }
         }
+
     }
 
     /* ////////////////////// SEARCH / FILTER /////////////////////// */
@@ -181,7 +186,7 @@ class SiteController extends Controller
     {
         $query = Articles::find();
         $pagination = new Pagination(['totalCount'=>$query->count(),'pageSize'=>9]);
-        $users = User::find()->all();
+        $users = User::find()->where("id != 1")->all();
         $articles = $this->getArticles($pagination,$sort,$author);
         $filters = [
             'sort' => $sort,
@@ -215,6 +220,7 @@ class SiteController extends Controller
         if (!$this->isGuest()) {
             return $this->goHome();
         }
+        return true;
     }
 
     public function getArticles($pagination,$sort = 1,$author = 0)

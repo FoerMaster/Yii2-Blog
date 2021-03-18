@@ -1,7 +1,6 @@
 <?php
 
 namespace app\modules\profile\controllers;
-use app\controllers\SiteController;
 use Yii;
 use app\models\Articles;
 use app\models\ActiclesSearch;
@@ -45,7 +44,6 @@ class ArticlesController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
                 ],
             ],
         ];
@@ -62,7 +60,7 @@ class ArticlesController extends Controller
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $dataProvider
         ]);
     }
 
@@ -77,9 +75,7 @@ class ArticlesController extends Controller
         $model = $this->findModel($id);
 
         if($model->HasAccess()){
-            return $this->render('view', [
-                'model' => $model,
-            ]);
+            return $this->redirect('../../post?id='.$id); //Я без поняти как это сделать, т.к при обычном рендере у меня еррор и не пускает к Main View
         }else{
             throw new NotAcceptableHttpException('У вас нет прав для редактирования!');  
         }

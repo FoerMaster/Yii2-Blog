@@ -1,8 +1,4 @@
 <?php
-
-/* @var $this \yii\web\View */
-/* @var $content string */
-
 use app\widgets\Alert;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
@@ -31,7 +27,7 @@ AppAsset::register($this);
 <div class="warp">
     <?php
     NavBar::begin([
-        'brandImage' => "http://blog.com.test/images/logo.png",
+        'brandImage' => "@web/images/logo.png",
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse c-nav navbar-fixed-top',
@@ -50,7 +46,7 @@ AppAsset::register($this);
     ]);
     NavBar::end();
     ?>
-    <img class="head-img" src="http://blog.com.test/images/head.png">
+    <?= Html::img('@web/images/head.png', ['alt' => 'Да да я','class'=>'head-img']) ?>
     <div class="container">
         <?= $content ?>
     </div>
