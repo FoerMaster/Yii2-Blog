@@ -36,9 +36,9 @@ $this->title = $article->title;
         </div>
         <div class="v-post-image-overlay hidden-xs">
             <?php
-                if($article->getImage()){
-                    echo Html::img($article->urlImage(), ['alt' => 'Картинка','class'=>'v-post-image']);
-                }
+            if($article->getImage()){
+                echo Html::img($article->urlImage(), ['alt' => 'Картинка','class'=>'v-post-image']);
+            }
             ?>
             <h1 class="v-post-title"><?php echo $article->title?></h1>
 
@@ -55,24 +55,23 @@ $this->title = $article->title;
         <hr class='c-hr'>
 
 
-
         <?=LinkPager::widget(['pagination' =>$pagination,]);?>
 
         <?php $form = ActiveForm::begin([
             'action'=>['site/comment', 'id'=>$article->id],
             'options'=>['class'=>'form-horizontal contact-form', 'role'=>'form']])?>
-            <div class="form-group comment-form">
+        <div class="form-group comment-form">
+            <div class="col-md-12">
+                <?php foreach($comments as $comment):?>
+                    <?= $this->render('/parts/comment',['comment' => $comment]); ?>
+                <?php endforeach;?>
 
-                <div class="col-md-12">
-                    <?php foreach($comments as $comment):?>
-                        <?= $this->render('/parts/comment',['comment' => $comment]); ?>
-                    <?php endforeach;?>
-                    <?= $form->field($commentForm, 'content')->textarea(['class'=>'form-control-c','placeholder'=>'Напишите сообщение...'])->label(false)?>
-                </div>
-                <button type="submit" class="button-prim w-full" >Отправить</button>
+                <?= $form->field($commentForm, 'content')->textarea(['class'=>'form-control-c','placeholder'=>'Напишите сообщение...'])->label(false)?>
             </div>
+            <button type="submit" class="button-prim w-full" >Отправить</button>
+        </div>
 
         <?php ActiveForm::end();?>
- 
+
     </div>
 </div>

@@ -3,8 +3,8 @@
  * @var $name
  * @var $message
  */
-    use yii\helpers\Html;
-    $this->title = $name;
+use yii\helpers\Html;
+$this->title = $name;
 ?>
 <div class="site-error white-theme">
     <h1><?= Html::encode($this->title) ?></h1>
