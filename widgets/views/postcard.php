@@ -2,7 +2,7 @@
     use yii\helpers\Html;
     use yii\helpers\Url;
 ?>
-<a class="goto-post" href="<?= Url::to(['../post', 'id' => $article->id]);?>">
+<a class="goto-post" href="<?= Url::to(['/post', 'id' => $article->id]);?>">
     <div class='col-sm-4 post-card'>
         <?php if ($article->urlImage() != '/storage/no-image.png'): ?>
             <img src="<?= $article->urlImage() ?>"  alt="">

@@ -1,4 +1,8 @@
 <?php
+/**
+ * @var $name
+ * @var $message
+ */
     use yii\helpers\Html;
     $this->title = $name;
 ?>

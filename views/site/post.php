@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * @var $article
+ * @var $pagination
+ * @var $commentForm
+ * @var $comments
+ */
 use yii\widgets\ActiveForm;
 use yii\widgets\LinkPager;
 use yii\helpers\Html;

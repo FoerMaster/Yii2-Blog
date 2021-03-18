@@ -1,8 +1,8 @@
 <?php
-namespace app\components;
+namespace app\widgets;
 use yii\base\Widget;
 
-class postCard extends Widget{
+class PostCard extends Widget{
     public $article;
 
     public function run(){

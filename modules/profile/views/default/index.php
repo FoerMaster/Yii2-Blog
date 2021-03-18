@@ -1,5 +1,6 @@
 <?php
-    use app\components\postCard;
+
+use app\widgets\PostCard;
 use yii\helpers\Html;
 
 $this->title = $user->login;
@@ -27,6 +28,6 @@ $this->title = $user->login;
 <div class="row">
 
     <?php foreach($posts as $article):?>
-        <?= postCard::widget(['article' => $article]) ?>
+        <?= PostCard::widget(['article' => $article]) ?>
     <?php endforeach;?>
 </div>
