@@ -355,3 +355,8 @@ a.desc:after {
     height: 37px;
     margin: 7px;
 }
+
+.form-horizontal .form-group {
+    margin-right: 0;
+    margin-left: 0;
+}
