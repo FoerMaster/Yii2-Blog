@@ -175,19 +175,62 @@ class SiteController extends Controller
         return $this->render('avatar',['model'=>$model]);
     }
 
-    public function actionComment($id)
+    /** @noinspection PhpUnreachableStatementInspection */
+    public function actionComment()
     {
-        $model = new CommentForm();
-
-        if(Yii::$app->request->isPost)
+        /*$model = new CommentForm();
+        $request = \Yii::$app->getRequest();
+        return ['success' => $request->post()];
+        if ($request->isPost && $model->load($request->post()))
         {
-            $model->load(Yii::$app->request->post());
-            if($model->saveComment($id))
-            {
-                return $this->redirect(['site/post','id'=>$id]);
-            }
-        }
 
+            \Yii::$app->response->format = Response::FORMAT_JSON;
+            die;
+            return ['success' => $model->saveComment($id)];
+
+        }
+        return $this->renderAjax('site/post', [
+            'model' => $model,
+            'id' => $id
+        ]);*/
+        $model = new CommentForm();
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        // Если пришёл AJAX запрос
+
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();
+            // Получаем данные модели из запроса
+            if ($model->load($data)) {
+                //Если всё успешно, отправляем ответ с данными
+                //
+                $save = $model->save();
+                $da = $this->renderPartial("/parts/comment",['comment' => $save]);
+                if($save){
+                    return [
+                        "model" => $da,
+                        "log" => "Комментарий оставлен!",
+                        "error" => null
+                    ];
+                }else{
+                    return [
+                        "data" => null,
+                        "error" => "Ошибка сервера (403)"
+                    ];
+                }
+            } else {
+                // Если нет, отправляем ответ с сообщением об ошибке
+                return [
+                    "data" => null,
+                    "error" => "Ошибка сервера (404)"
+                ];
+            }
+        } else {
+            // Если это не AJAX запрос, отправляем ответ с сообщением об ошибке
+            return [
+                "data" => null,
+                "error" => "Ошибка сервера (500)"
+            ];
+        }
     }
 
     /* ////////////////////// HELP /////////////////////// */

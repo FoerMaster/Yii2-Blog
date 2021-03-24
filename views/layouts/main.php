@@ -20,8 +20,11 @@ AppAsset::register($this);
     <?php $this->head() ?>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
 </head>
-<body>
+<body onload="myLoad()">
+
+<div id="overlayy"><div id="loader"></div></div>
 <?php $this->beginBody() ?>
 
 <div class="warp">
@@ -38,7 +41,7 @@ AppAsset::register($this);
         'items' => [
             Yii::$app->user->isGuest ? ['label' => 'Регистрация', 'url' => ['/site/register']] : ['label' => 'Добавить пост', 'url' => ['/profile/articles/create']],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Авторизация', 'url' => ['/site/login']]
+            ['label' => 'Авторизация', 'url' => ['/site/login']]
             ) : (
                 "<a href='".Url::to(['/profile', 'id' => Yii::$app->user->identity->id])."'><img width='50' src='".  Yii::getAlias('@web').'/storage/'.Yii::$app->user->identity->avatar. "'></a>"
             )

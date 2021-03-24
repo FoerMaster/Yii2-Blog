@@ -8,23 +8,30 @@ use app\models\Comments;
 class CommentForm extends Model
 {
     public $content;
-    
+    public $article_id;
+    /**
+     * @var mixed
+     */
+
+
     public function rules()
     {
         return [
             [['content'], 'required'],
+            [['article_id'], 'required'],
             [['content'], 'string', 'length' => [3,250]]
         ];
     }
 
-    public function saveComment($article_id)
+    public function save()
     {
         $comment = new Comments;
         $comment->content = $this->content;
         $comment->author = !Yii::$app->user->isGuest ? Yii::$app->user->id : 1;
-        $comment->article_id = $article_id;
+        $comment->article_id = $this->article_id;
         $comment->date = date('Y-m-d');
-        return $comment->save();
+        $comment->save();
+        return $comment;
 
     }
 }

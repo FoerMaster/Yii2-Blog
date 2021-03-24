@@ -58,20 +58,26 @@ $this->title = $article->title;
         <?=LinkPager::widget(['pagination' =>$pagination,]);?>
 
         <?php $form = ActiveForm::begin([
-            'action'=>['site/comment', 'id'=>$article->id],
-            'options'=>['class'=>'form-horizontal contact-form', 'role'=>'form']])?>
-        <div class="form-group comment-form">
-            <div class="col-md-12">
-                <?php foreach($comments as $comment):?>
-                    <?= $this->render('/parts/comment',['comment' => $comment]); ?>
-                <?php endforeach;?>
+            'id' => 'comForm',
+            'action' => 'site/comment',
+            'method'=>'post',
+            'enableAjaxValidation' => false,
 
-                <?= $form->field($commentForm, 'content')->textarea(['class'=>'form-control-c','placeholder'=>'Напишите сообщение...'])->label(false)?>
+            'options'=>['class'=>'form-horizontal contact-form']])?>
+
+            <div class="form-group comment-form">
+                <div class="col-md-12">
+                    <div id="comments">
+                        <?php foreach($comments as $comment):?>
+                            <?= $this->render('/parts/comment',['comment' => $comment]); ?>
+                        <?php endforeach;?>
+                    </div>
+                    <?= $form->field($commentForm, 'article_id')->hiddenInput(['value' => $article->id])->label(false)?>
+                    <?= $form->field($commentForm, 'content')->textarea(['class'=>'form-control-c','placeholder'=>'Напишите сообщение...'])->label(false)?>
+                </div>
+                <button type="submit" class="button-prim w-full" >Отправить</button>
             </div>
-            <button type="submit" class="button-prim w-full" >Отправить</button>
-        </div>
 
         <?php ActiveForm::end();?>
-
     </div>
 </div>

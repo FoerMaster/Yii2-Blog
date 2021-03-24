@@ -29,7 +29,8 @@ class AppAsset extends AssetBundle
 
     ];
     public $js = [
-        'js/filter.js'
+        'js/filter.js',
+        'js/ajaxcom.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
